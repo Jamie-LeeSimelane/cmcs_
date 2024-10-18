@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model cmcs_.Models.ClaimDocument
+
+@{
+    ViewData["Title"] = "Upload Supporting Document";
+}
+
+<div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+        <h5>Upload Supporting Document for Claim ID: @Model.ClaimId</h5>
+    </div>
+    <div class="card-body">
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-success">
+                @ViewBag.Message
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+        <form asp-action="UploadSupportingDocuments" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ClaimId" />
+
+            <div class="form-group">
+                <label asp-for="FileName">File Name:</label>
+                <input type="text" asp-for="FileName" class="form-control" placeholder="Enter the file name" />
+                <span asp-validation-for="FileName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Select Document:</label>
+                <input type="file" name="document" class="form-control-file" required /> <!-- Add required attribute -->
+                <small class="form-text text-muted">Accepted file types: .pdf, .docx, .xlsx</small> <!-- Provide user guidance -->
+            </div>
+
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}

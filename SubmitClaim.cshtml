@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model cmcs_.Models.Claim
+
+<div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+        <h5>Submit a New Claim</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="LecturerName">Lecturer Name:</label>
+                <input asp-for="LecturerName" class="form-control" placeholder="Enter your full name" required />
+                <span asp-validation-for="LecturerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoursWorked">Hours Worked:</label>
+                <input asp-for="HoursWorked" class="form-control" placeholder="Enter the number of hours worked" required />
+                <span asp-validation-for="HoursWorked" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HourlyRate">Hourly Rate:</label>
+                <input asp-for="HourlyRate" class="form-control" placeholder="Enter your hourly rate" required />
+                <span asp-validation-for="HourlyRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes">Additional Notes:</label>
+                <textarea asp-for="Notes" class="form-control" placeholder="Enter any additional notes"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Upload Supporting Document:</label>
+                <input type="file" name="file" class="form-control-file" accept=".pdf, .docx, .xlsx" required />
+                <small class="form-text text-muted">Accepted file types: .pdf, .docx, .xlsx</small>
+                <span asp-validation-for="file" class="text-danger"></span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Submit Claim</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}

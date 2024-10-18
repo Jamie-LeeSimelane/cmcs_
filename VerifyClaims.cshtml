@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model IEnumerable<cmcs_.Models.Claim>
+
+@{
+    ViewData["Title"] = "Verify Claims";
+}
+
+<div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+        <h5>Verify Claims</h5>
+    </div>
+    <div class="card-body">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Success"]
+            </div>
+        }
+        if (TempData["Error"] != null)
+        {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+        }
+
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info">
+                No claims available for verification.
+            </div>
+        }
+        else
+        {
+            <table class="table table-striped table-bordered table-responsive">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Lecturer Name</th>
+                        <th>Hours Worked</th>
+                        <th>Hourly Rate</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var claim in Model)
+                    {
+                        <tr>
+                            <td>@claim.LecturerName</td>
+                            <td>@claim.HoursWorked</td>
+                            <td>@claim.HourlyRate.ToString("C")</td>
+                            <td>
+                                <span class="badge
+                                    @(claim.Status == "Approved" ? "badge-success" :
+                                      claim.Status == "Rejected" ? "badge-danger" :
+                                      "badge-warning")">
+                                    @claim.Status
+                                </span>
+                            </td>
+                            <td>
+                                @if (claim.Status == "Pending") // Only show actions for pending claims
+                                {
+                                    <form method="post" action="@Url.Action("ApproveClaim", "Lecturer")" class="d-inline" onsubmit="return confirm('Are you sure you want to approve this claim?');">
+                                        <input type="hidden" name="claimId" value="@claim.Id" />
+                                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                                    </form>
+                                    <form method="post" action="@Url.Action("RejectClaim", "Lecturer")" class="d-inline" onsubmit="return confirm('Are you sure you want to reject this claim?');">
+                                        <input type="hidden" name="claimId" value="@claim.Id" />
+                                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Actions not available</span> <!-- Indicate that actions are not available -->
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}
