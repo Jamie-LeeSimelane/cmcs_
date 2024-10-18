@@ -1,0 +1,167 @@
+/* Color variables */
+:root {
+    --primary-color: #007bff;
+    --primary-hover-color: #0056b3;
+    --secondary-color: #258cfb;
+    --text-color: #333;
+    --light-background: #f8f9fa;
+    --white-color: #fff;
+    --dark-color: #343a40;
+    --border-radius: 0.5rem;
+    --shadow-light: 0 0 15px rgba(0, 0, 0, 0.1);
+    --max-file-size: 5 * 1024 * 1024;
+}
+
+/* Root styles */
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: var(--light-background); /* Clean background */
+    color: var(--text-color); /* Darker text */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Focus and hover styles */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem var(--white-color), 0 0 0 0.25rem var(--secondary-color);
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--primary-color);
+}
+
+    .navbar a {
+        color: var(--white-color) !important;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+        .navbar a:hover {
+            text-decoration: underline;
+            color: #e0e0e0 !important;
+        }
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 10px 0;
+    text-align: center;
+}
+
+    header h1 {
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+
+/* Forms */
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+    .form-control:focus {
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 0 0.1rem rgba(37, 140, 251, 0.25);
+    }
+
+/* Buttons */
+.custom-button {
+    background-color: #007bff; /* Change to your desired color */
+    color: black;; /* Text color */
+    font-size: 1.25rem; /* Font size */
+    padding: 10px 20px; /* Padding */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Ensure it behaves like a button */
+}
+
+    .custom-button:hover {
+        background-color: #0056b3; /* Darker shade for hover effect */
+        color: black;; /* Keep text color white on hover */
+    }
+
+
+/* Cards */
+.card {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    margin-bottom: 20px;
+    padding: 15px;
+    transition: box-shadow 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+.card-header {
+    font-weight: 600;
+    padding: 10px;
+}
+
+/* Tables */
+.table {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+    .table th {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+    }
+
+    .table th, .table td {
+        padding: 10px;
+        text-align: center;
+    }
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--light-background);
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .btn-success, .btn-danger {
+        width: 100%;
+        display: block;
+        margin: 10px 0;
+    }
+}
